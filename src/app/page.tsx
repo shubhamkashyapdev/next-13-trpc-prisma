@@ -1,11 +1,15 @@
-import TodoList from "./_components/TodoList";
-import { serverClient } from "@/app/_trpc/serverClient";
+import { getServerSession } from "next-auth";
+import TodoList from "../components/TodoList";
+import { serverClient } from "@/trpc/serverClient";
+import { HomeHero } from "@/components/Hero";
 
 export default async function Home() {
-  const data = await serverClient.todo.getTodos();
+  const session = await getServerSession();
+  const caller = serverClient(session);
+  const data = await caller.todo.getTodos();
   return (
     <div>
-      <TodoList data={data} />
+      <HomeHero />
     </div>
   );
 }

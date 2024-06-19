@@ -1,4 +1,4 @@
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, privateProcedure, publicProcedure } from "../trpc";
 
 export const todoRouter = createTRPCRouter({
   getTodos: publicProcedure.query(async ({ ctx }) => {
@@ -7,7 +7,7 @@ export const todoRouter = createTRPCRouter({
       todos: todos,
     };
   }),
-  createTodo: publicProcedure.mutation(async ({ ctx }) => {
+  createTodo: privateProcedure.mutation(async ({ ctx }) => {
     await ctx.prisma.todo.create({
       data: {
         todo: "New Todo",

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { trpc } from "../_trpc/client";
+import { trpc } from "../trpc/client";
 
 const TodoList = ({ data: todosData }: { data: any }) => {
   const { data } = trpc.todo.getTodos.useQuery(undefined, {

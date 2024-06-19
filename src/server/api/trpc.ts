@@ -9,7 +9,7 @@ type CreateContextOptions = {
   session: Session | null;
 };
 
-const createInnerTRPCContext = (opts: CreateContextOptions) => {
+export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     session: opts.session,
     prisma,
@@ -45,10 +45,12 @@ const enforceAuth = t.middleware(({ ctx, next }) => {
   return next({
     ctx: {
       session: { ...ctx.session, user: ctx.session.user },
+      prisma,
     },
   });
 });
 
 export const createTRPCRouter = t.router;
+export const createCallerFactory = t.createCallerFactory;
 export const publicProcedure = t.procedure.use(inferSession);
 export const privateProcedure = t.procedure.use(enforceAuth);
