@@ -1,12 +1,14 @@
 {
-  "name": "itinerary-generation-cms",
+  "name": "next-trpc-prisma",
+  "description": "Next.js App Router With TRPC & Prisma Starter Template To KickStart Your Next Full Stack Application",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",
